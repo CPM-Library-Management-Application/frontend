@@ -10,6 +10,7 @@ import { PageEmployeePanelComponent } from './private/page-employee-panel/page-e
 import { PageAdminPanelComponent } from './private/page-admin-panel/page-admin-panel.component';
 import { PageUserPanelComponent } from './private/page-user-panel/page-user-panel.component';
 import { PageRegisterComponent } from './public/page-register/page-register.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { PageRegisterComponent } from './public/page-register/page-register.comp
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     RouterModule.forRoot([
       { path: '', component: PageHomeComponent },
       { path: 'login', component: PageLoginComponent },

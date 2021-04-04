@@ -1,1 +1,66 @@
-<p>page-register works!</p>
+<form #form="ngForm">
+    <div class="form-group mb-3 d-flex flex-column align-items-center p-5 mt-5">
+        <div style="width: 400px; min-width: 300px;">
+            <div><input 
+                required
+                minlength="5"
+                ngModel 
+                name="username" 
+                #username="ngModel" 
+                type="text" 
+                class="form-control mb-3" 
+                placeholder="Username" 
+                aria-label="Username" 
+                aria-describedby="basic-addon1"></div>
+            <div 
+            class="alert alert-danger" 
+            *ngIf="!username.valid && username.touched">
+                <div *ngIf="username.errors?.required">Username is required.</div>
+                <div *ngIf="username.errors?.minlength">Username must be at least {{ username.errors?.minlength.requiredLength }} characters long!</div>
+            </div>
+            <div><input 
+                required 
+                ngModel 
+                name="email" 
+                type="text" 
+                #email="ngModel" 
+                class="form-control mb-3" 
+                placeholder="E-mail" 
+                aria-label="E-mail" 
+                aria-describedby="basic-addon1"></div>
+            <div class="alert alert-danger" 
+            *ngIf="email.touched && !email.valid">E-mail is required</div>
+            <div><input 
+                required
+                minlength="8" 
+                ngModel 
+                name="password" 
+                #password="ngModel" 
+                type="password" 
+                class="form-control mb-3" 
+                placeholder="Password" 
+                aria-label="Password" 
+                aria-describedby="basic-addon1"></div>
+            <div class="alert alert-danger" 
+            *ngIf="password.touched && !password.valid">Password is required</div>
+            <div><input 
+                required
+                minlength="8" 
+                ngModel 
+                name="password-confirm" 
+                #passwordConfirm="ngModel" 
+                type="password" 
+                class="form-control mb-3" 
+                placeholder="Confirm password" 
+                aria-label="Confirm Password" 
+                aria-describedby="basic-addon1"></div>
+            <div class="alert alert-danger" 
+            *ngIf="passwordConfirm.touched && !passwordConfirm.valid">Confirm your password</div>
+        </div>
+        <div class="d-flex flex-column mt-4">
+            <button class="btn btn-success mt-5 mb-4" [disabled]="!form.valid">Sign up!</button>
+            Already have an account?
+            <button class="btn btn-outline-success mt-2" routerLink="/login">Login!</button>
+        </div>
+    </div>
+</form>
