@@ -1,15 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/services/login.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-page-login',
   templateUrl: './page-login.component.html',
   styleUrls: ['./page-login.component.css']
 })
-export class PageLoginComponent implements OnInit {
+export class PageLoginComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  isLoggedIn?: number;
+  subscription?: Subscription;
 
+  constructor(private login: LoginService) { }
+ 
   ngOnInit(): void {
+    this.subscription = this.login.currentLoginState.subscribe(isLoggedIn => this.isLoggedIn = isLoggedIn);
+  }
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+  }
+
+  loginButtonHandler() {
+    console.log('Login button clicked!');
+    this.login.login();
   }
 
 }
