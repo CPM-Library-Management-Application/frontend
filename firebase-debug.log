@@ -1,0 +1,37 @@
+[debug] [2021-04-05T11:50:14.920Z] ----------------------------------------------------------------------
+[debug] [2021-04-05T11:50:14.921Z] Command:       /usr/local/bin/node /usr/local/bin/firebase init
+[debug] [2021-04-05T11:50:14.922Z] CLI Version:   9.8.0
+[debug] [2021-04-05T11:50:14.922Z] Platform:      darwin
+[debug] [2021-04-05T11:50:14.922Z] Node Version:  v12.16.1
+[debug] [2021-04-05T11:50:14.923Z] Time:          Mon Apr 05 2021 13:50:14 GMT+0200 (Central European Summer Time)
+[debug] [2021-04-05T11:50:14.923Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-04-05T11:50:14.930Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-04-05T11:50:14.930Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/bartlomiejwitek/CPM
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2021-04-07T09:41:51.822Z] TypeError: Cannot read property 'setRawMode' of null
+    at ReadStream.setRawMode (tty.js:75:28)
+    at Interface._setRawMode (readline.js:283:16)
+    at Interface.close (readline.js:406:10)
+    at ReadStream.ontermend (readline.js:194:10)
+    at ReadStream.emit (events.js:323:22)
+    at ReadStream.EventEmitter.emit (domain.js:482:12)
+    at endReadableNT (_stream_readable.js:1204:12)
+    at processTicksAndRejections (internal/process/task_queues.js:84:21)
