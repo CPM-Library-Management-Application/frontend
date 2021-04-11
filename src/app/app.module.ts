@@ -1,6 +1,5 @@
 import { Input, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http'
 
 import { AppComponent } from './app.component';
@@ -14,13 +13,14 @@ import { PageRegisterComponent } from './public/page-register/page-register.comp
 import { FormsModule } from '@angular/forms';
 import { ResultListComponent } from './common/result-list/result-list.component';
 import { BookService } from './services/book.service';
-import { AuthGuard } from './services/auth-guard.service';
 import { AccessDeniedComponent } from './public/access-denied/access-denied.component';
-import { AdminAuthGuard } from './services/admin-auth-guard.service';
-import { RegisteredUserAuthGuard } from './services/registered-user-auth-guard.service';
-import { EmployeeAuthGuard } from './services/employee-auth-guard.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DropdownComponent } from './common/dropdown/dropdown.component';
+import { PageSearchResultsComponent } from './public/page-search-results/page-search-results.component';
+import { AppRoutingModule } from './app-routing.module';
+import { CommonModule } from '@angular/common';
+import { BookDetailsComponent } from './common/book-details/book-details.component';
+import { LibraryMapComponent } from './common/library-map/library-map.component';
 
 @NgModule({
   declarations: [
@@ -34,22 +34,18 @@ import { DropdownComponent } from './common/dropdown/dropdown.component';
     PageRegisterComponent,
     ResultListComponent,
     AccessDeniedComponent,
-    DropdownComponent
+    DropdownComponent,
+    PageSearchResultsComponent,
+    BookDetailsComponent,
+    LibraryMapComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
+    AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot([
-      { path: '', component: PageHomeComponent },
-      { path: 'login', component: PageLoginComponent },
-      { path: 'register', component: PageRegisterComponent},
-      { path: 'access-denied', component: AccessDeniedComponent},
-      { path: 'private/employee-panel', component: PageEmployeePanelComponent, canActivate: [AuthGuard, EmployeeAuthGuard ]},
-      { path: 'private/admin-panel', component: PageAdminPanelComponent, canActivate: [AuthGuard, AdminAuthGuard]},
-      { path: 'private/user-panel', component: PageUserPanelComponent, canActivate: [AuthGuard, RegisteredUserAuthGuard ]}
-    ]),
-    NgbModule
+    NgbModule,
   ],
   providers: [
     BookService

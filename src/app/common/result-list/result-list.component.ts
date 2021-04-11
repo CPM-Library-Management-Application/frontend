@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { BookService } from 'src/app/services/book.service';
 
 @Component({
@@ -9,9 +9,10 @@ import { BookService } from 'src/app/services/book.service';
 })
 export class ResultListComponent implements OnInit {
   posts: any;
-  constructor(private bookService: BookService) { 
-    
-  }
+  selectedBook: any = "";
+  @Output("book-selected") bookSelected = new EventEmitter<any>();
+
+  constructor(private bookService: BookService) {  }
 
   ngOnInit(): void {
     this.bookService.getBooks()
@@ -24,6 +25,11 @@ export class ResultListComponent implements OnInit {
           alert('An unexpected error occurred');
         }
       });
+  }
+
+  selectBook(book:any){
+    this.selectedBook = book;
+    this.bookSelected.emit(this.selectedBook);
   }
 
 }

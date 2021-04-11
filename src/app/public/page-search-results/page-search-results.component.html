@@ -1,0 +1,18 @@
+<div class="row mt-5">
+    <div class="col-4">
+        <form>
+            <div class="mb-3">
+                <div style="width:100%;">
+                    <input placeholder="I'm searching for a book..." type="text" class="form-control search-box" aria-describedby="Search book">
+                </div>
+            </div>
+        </form>
+        <div class=" d-flex" style="justify-content: center; overflow: scroll;  height: 450px;">
+            <app-result-list (book-selected)="selectedBookEvent($event)"></app-result-list>
+        </div>
+    </div>
+    <div class="col-8">
+        <app-book-details [book]="selectedBook"></app-book-details>
+        <app-library-map></app-library-map>
+    </div>
+</div>
