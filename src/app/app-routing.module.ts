@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BookDetailsComponent } from './common/book-details/book-details.component';
 import { PageAdminPanelComponent } from './private/page-admin-panel/page-admin-panel.component';
 import { PageEmployeePanelComponent } from './private/page-employee-panel/page-employee-panel.component';
 import { PageUserPanelComponent } from './private/page-user-panel/page-user-panel.component';
@@ -17,7 +18,7 @@ export const routes: Routes = [
   { path: '', component: PageHomeComponent },
   { path: 'login', component: PageLoginComponent },
   { path: 'register', component: PageRegisterComponent},
-  { path: 'search-results', component: PageSearchResultsComponent},
+  { path: 'search-results/:id', component: PageSearchResultsComponent},
   { path: 'access-denied', component: AccessDeniedComponent},
   { path: 'private/employee-panel', component: PageEmployeePanelComponent, canActivate: [AuthGuard, EmployeeAuthGuard ]},
   { path: 'private/admin-panel', component: PageAdminPanelComponent, canActivate: [AuthGuard, AdminAuthGuard]},
