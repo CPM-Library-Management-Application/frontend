@@ -1,35 +1,46 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, OnDestroy, ChangeDetectionStrategy, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject, combineLatest, EMPTY, Observable, Subject } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
+import { Book } from 'src/app/models/book';
 import { BookService } from 'src/app/services/book.service';
 
 @Component({
   selector: 'app-result-list',
   templateUrl: './result-list.component.html',
-  styleUrls: ['./result-list.component.css']
+  styleUrls: ['./result-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ResultListComponent implements OnInit {
-  posts: any;
-  selectedBook: any = "";
+  // selectedBook: any = "";
+  @Input() displayShowMore = false;
   @Output("book-selected") bookSelected = new EventEmitter<any>();
+  selectedBook$ = this.bookService.selectedBook$;
+  books$ = this.bookService.books$;
 
-  constructor(private bookService: BookService) {  }
+  constructor(private bookService: BookService, private route: ActivatedRoute, private router: Router) {  }
 
   ngOnInit(): void {
-    this.bookService.getBooks()
-      .subscribe(response => {
-        this.posts = response;
-      }, (error: Response) => {
-        if(error.status === 404){
-          alert('Error 404!')
-        }else{
-          alert('An unexpected error occurred');
+    this.route.paramMap.subscribe(
+      params => {
+        const id = parseInt(params.get('id')!);
+        if(id > 0){
+          this.bookService.selectedBookChanged(id);
         }
-      });
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
   }
 
   selectBook(book:any){
-    this.selectedBook = book;
-    this.bookSelected.emit(this.selectedBook);
+    console.log(book);
+    // this.selectedBook = book;
+    this.bookService.selectedBookChanged(book.id);
+    this.router.navigate(['search-results',book.id]);
+    // this.bookSelected.emit(this.selectedBook);
   }
 
 }

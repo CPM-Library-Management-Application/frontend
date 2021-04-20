@@ -1,5 +1,6 @@
-<div class="list-group">
-    <a *ngFor="let post of posts" [class]="selectedBook == post?'active':''" (click)="selectBook(post)" class="list-group-item list-group-item-action">
-        {{ post.title }}
+<div class="list-group" *ngIf="books$ | async as books">
+    <a *ngFor="let book of books | slice:0:10" [class]="{'active' : book?.id == (selectedBook$ | async)?.id}" (click)="selectBook(book)" class="list-group-item list-group-item-action">
+        {{ book.title }}
     </a>
+    <button *ngIf="displayShowMore" class="btn btn-success" [routerLink]="['/search-results', 1]">Show more...</button>
 </div>
