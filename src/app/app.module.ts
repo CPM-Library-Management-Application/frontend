@@ -26,6 +26,7 @@ import { PageBookLendComponent } from './private/page-employee-panel/employee-pa
 import { PageBookReturnComponent } from './private/page-employee-panel/employee-panel/book-return/book-return.component';
 import { PageBookAddComponent } from './private/page-employee-panel/employee-panel/book-add/book-add.component';
 import { DialogBoxComponent } from './common/dialog-box/dialog-box.component';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { DialogBoxComponent } from './common/dialog-box/dialog-box.component';
     FormsModule,
     HttpClientModule,
     NgbModule,
+    ZXingScannerModule
   ],
   providers: [
     BookService
