@@ -21,6 +21,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
 import { BookDetailsComponent } from './common/book-details/book-details.component';
 import { LibraryMapComponent } from './common/library-map/library-map.component';
+import { MainComponent } from './private/page-employee-panel/employee-panel/main/main.component';
+import { PageBookLendComponent } from './private/page-employee-panel/employee-panel/book-lend/book-lend.component';
+import { PageBookReturnComponent } from './private/page-employee-panel/employee-panel/book-return/book-return.component';
+import { PageBookAddComponent } from './private/page-employee-panel/employee-panel/book-add/book-add.component';
+import { DialogBoxComponent } from './common/dialog-box/dialog-box.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +42,12 @@ import { LibraryMapComponent } from './common/library-map/library-map.component'
     DropdownComponent,
     PageSearchResultsComponent,
     BookDetailsComponent,
-    LibraryMapComponent
+    LibraryMapComponent,
+    MainComponent,
+    PageBookLendComponent,
+    PageBookReturnComponent,
+    PageBookAddComponent,
+    DialogBoxComponent
   ],
   imports: [
     CommonModule,
