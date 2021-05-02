@@ -1,7 +1,8 @@
+import { EditEmployeeComponent } from './private/page-admin-panel/employees/edit-employee.component';
 import { Input, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'
-
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './common/navbar/navbar.component';
 import { PageHomeComponent } from './public/page-home/page-home.component';
@@ -21,6 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
 import { BookDetailsComponent } from './common/book-details/book-details.component';
 import { LibraryMapComponent } from './common/library-map/library-map.component';
+import { LibraryService } from './private/page-admin-panel/libraries/library.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { LibraryMapComponent } from './common/library-map/library-map.component'
     DropdownComponent,
     PageSearchResultsComponent,
     BookDetailsComponent,
-    LibraryMapComponent
+    LibraryMapComponent,
+    EditEmployeeComponent
   ],
   imports: [
     CommonModule,
@@ -48,7 +51,8 @@ import { LibraryMapComponent } from './common/library-map/library-map.component'
     NgbModule,
   ],
   providers: [
-    BookService
+    BookService,
+    LibraryService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,40 @@
+<h4>Employee:</h4>
+<br/>
+<div class="row">
+    <div class="col-sm-3">
+    <div class=" form-group">
+      <label for="Username">Username:</label>
+      <input type = "text" name="Username" [(ngModel)]="employee.Username" class="form-control">
+    </div> 
+    <div class="form-group">
+      <label for="Password">Password:</label>
+      <input type="text" name="Password" [(ngModel)]="employee.Password" class="form-control">
+    </div>  
+    <div class="form-group">
+      <label for="Email">Email:</label>
+      <input type="text" name="Email" [(ngModel)]="employee.Email" class="form-control">
+    </div>  
+ 
+    <div class="form-group">
+        <label for="ID">ID:</label>
+        <input type="number" name="ID" [(ngModel)]="employee.ID" class="form-control">
+      </div>
+     
+     <div class="form-group">
+        <label for="Rights">Rights:</label>
+        <input type="number" name="Rights" [(ngModel)]="employee.Rights" class="form-control">
+      </div>
+     
+      <div class="form-group">
+        <label for="LibraryID">LibraryID:</label>
+        <input type="number" name="LibraryID" [(ngModel)]="employee.LibraryID" class="form-control">
+      </div>
+
+    <div>
+    <button
+      type="submit"
+      class="badge badge-success"
+      (click)="saveEmployee()"
+    > Save </button>
+    </div>
+    

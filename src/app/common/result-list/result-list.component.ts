@@ -3,7 +3,6 @@ import { Component, EventEmitter, OnInit, Output, OnDestroy, ChangeDetectionStra
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, combineLatest, EMPTY, Observable, Subject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Book } from 'src/app/models/book';
 import { BookService } from 'src/app/services/book.service';
 
 @Component({

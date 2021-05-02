@@ -1,5 +1,5 @@
+import { EditEmployeeComponent } from './private/page-admin-panel/employees/edit-employee.component';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import { BookDetailsComponent } from './common/book-details/book-details.component';
 import { PageAdminPanelComponent } from './private/page-admin-panel/page-admin-panel.component';
 import { PageEmployeePanelComponent } from './private/page-employee-panel/page-employee-panel.component';
@@ -13,6 +13,8 @@ import { AdminAuthGuard } from './services/admin-auth-guard.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { EmployeeAuthGuard } from './services/employee-auth-guard.service';
 import { RegisteredUserAuthGuard } from './services/registered-user-auth-guard.service';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
+
 
 export const routes: Routes = [
   { path: '', component: PageHomeComponent },
@@ -22,13 +24,16 @@ export const routes: Routes = [
   { path: 'access-denied', component: AccessDeniedComponent},
   { path: 'private/employee-panel', component: PageEmployeePanelComponent, canActivate: [AuthGuard, EmployeeAuthGuard ]},
   { path: 'private/admin-panel', component: PageAdminPanelComponent, canActivate: [AuthGuard, AdminAuthGuard]},
-  { path: 'private/user-panel', component: PageUserPanelComponent, canActivate: [AuthGuard, RegisteredUserAuthGuard ]}
-]
+  { path: 'private/user-panel', component: PageUserPanelComponent, canActivate: [AuthGuard, RegisteredUserAuthGuard ]},
+  { path: 'private/admin-panel/listoflibraries', component: PageAdminPanelComponent, canActivate: [AuthGuard, AdminAuthGuard]},
+  { path: 'private/admin-panel/editemployee/:id', component: EditEmployeeComponent,canActivate: [AuthGuard, AdminAuthGuard] },
+  { path: '', redirectTo: 'employees', pathMatch: 'full' },
+ 
+]  
 
 @NgModule({
   exports: [RouterModule],
-  imports: [
-    RouterModule.forRoot(routes)
+  imports: [RouterModule.forRoot(routes)
   ]
 })
 export class AppRoutingModule { }

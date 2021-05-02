@@ -1,3 +1,93 @@
-<p>page-admin-panel works!</p>
+<hr>
+<h3>Welcome to Admin Panel!</h3>
+<p class="Welcome">Manage the resources of libraries and their employees.</p>
+<hr>
+  <h4>List of Libraries/Employees </h4>
+<br/>
 
+<th> Name/ </th>    
+<th> Location/ </th> 
+<th> ID </th> 
+<br>
+<div class="row">
+  <div class="col-md-6">  
+<ul class= "list-group">
+  <li
+   class="list-group-item"
+   *ngFor="let library of libraries; let i = index"
+   [class.active]="i == currentLibraryIndex"
+   (click)="setActiveLibrary(library, i)"
+  >
+      <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1"> {{ library.name }}</h5> {{ library.ID }} </div>
+      <small>  {{ library.location }} </small>
+
+    </li></ul> 
+    <br/> <br/>
+  </div>
+  <div class="col-md-6">
+  <ul class="list-group">
+    <li
+      class="list-group-item"
+      *ngFor="let employee of employees; let i = index"
+      [class.active]="i == currentEmployeeIndex"
+      (click)="setActiveEmployee(employee, i)"
+    >
+      {{ employee.Username }}
+    
+      {{ employee.ID }}
+    
+    </li>
+  </ul>
   
+  <div *ngIf="currentEmployeeID >= 1">
+    <div> 
+      <label><strong>Username:</strong></label> 
+     {{ selectedEmployee.Username }} 
+    </div>
+    <div>
+      <label><strong>Password:</strong></label>
+      {{ selectedEmployee.Password }}
+    </div>
+    <div>
+      <label><strong>Email:</strong></label>
+      {{ selectedEmployee.Email }}
+    </div>
+    <div>
+      <label><strong>ID:</strong></label>
+      {{ selectedEmployee.ID }}
+    </div>
+    <label><strong>Rights:</strong></label>
+    {{ selectedEmployee.Rights }}
+  </div>
+
+  <div *ngIf="currentEmployeeID >= 1">
+    <a class="badge badge-warning" routerLink="/private/admin-panel/editemployee/{{currentEmployeeID}}" >Edit
+    </a>
+    <router-outlet></router-outlet>
+  </div>
+   </div>
+<form>
+  <div class="row">
+    <div class="col-md-4 form-group">
+      <label for="name">Name</label>
+      <input type = "text" id="name" name="name" [(ngModel)]="libraryName" class="form-control">
+    </div>
+    <div class="col-sm-2 form-group">
+      <label for="Location">Location</label>
+      <input type="text" id="location" name="location" [(ngModel)]="libraryLocation" class="form-control">
+    </div>
+    <div class="col-sm-2 form-group">
+      <label for="ID">ID</label>
+      <input type="number" id="ID" name="ID" [(ngModel)]="libraryID" class="form-control">
+    </div>
+  </div>
+    <div class="col-xs-20">
+      <button class="btn btn-success" (click)="addLibrary()" type="submit">Add</button>
+      <button class="btn btn-danger" badge-danger type="button" (click)="deleteLibrary()" >Delete</button>
+  </div>
+</form>
+
+ 
+
+
