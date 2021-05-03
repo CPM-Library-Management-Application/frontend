@@ -1,0 +1,20 @@
+<form #form="ngForm">
+    <div class="d-flex">
+        <div class="d-flex mb-3 mt-3" style="flex-direction: column; width: 50%;">
+            <h1>Add a book</h1>
+            <div class="alert alert-success mt-1" role="alert">
+                Instructions: <br> 1) Fill the form on the right <br> 2) Click "Add the book"
+            </div>
+            <button class="mb-4 btn btn-success left-panel" [disabled]="!form.valid" (click)="addBookButtonHandler()">Add the book</button>
+            <button class="btn btn-outline-success left-panel" routerLink="/private/employee-panel">Back</button>
+        </div>
+        <div>
+            <div class="form-group mb-3 d-flex flex-column align-items-center p-5 mt-5">
+                <div style="width: 400px;">
+                    <div><input required ngModel name="title" #title="ngModel" type="text" class="form-control mb-3" placeholder="Book title" aria-label="Book title" aria-describedby="basic-addon1"></div>
+                    <div><input required ngModel name="author" type="text" #author="ngModel" class="form-control" placeholder="Author" aria-label="Author" aria-describedby="basic-addon1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

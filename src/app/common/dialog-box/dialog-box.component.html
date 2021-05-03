@@ -1,0 +1,11 @@
+<div class="dialog-box" [class]="{'dialog-box-display': config.display}">
+    <div class="d-flex dialog-box-content">
+        <div *ngIf="config.isSuccess" class="alert alert-success" style="width: 100%; text-align: center;">Success!</div>
+        <div *ngIf="!config.isSuccess" class="alert alert-danger" style="width: 100%; text-align: center;">Error!</div>
+        <div class="mb-2"> Info: {{ config.message }} </div>
+        <div>
+            <button class="btn btn-secondary" [class]="{'mr-3':config.isSuccess}" (click)="closeButtonHandler()">Close</button>
+            <button class="ml-3 btn btn-success" *ngIf="config.isSuccess" (click)="printButtonHandler()">Print</button>
+        </div>
+    </div>
+</div>

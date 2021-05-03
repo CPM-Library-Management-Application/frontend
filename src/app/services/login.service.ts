@@ -20,9 +20,9 @@ export class LoginService {
     //Api request goes here
     // this.updateLoginState.emit("new message");
     setTimeout(() => {
-      localStorage.setItem('loginState', UserRole.ADMIN.toString());
+      localStorage.setItem('loginState', UserRole.LIBRARY_EMPLOYEE.toString());
       //Mock value, to be changed depending on the api response.
-      this.userRole.next(UserRole.ADMIN);
+      this.userRole.next(UserRole.LIBRARY_EMPLOYEE);
     },1200);
   }
   logout(){
@@ -47,6 +47,9 @@ export class LoginService {
         break;
       case UserRole.ADMIN.toString():
         this.userRole.next(UserRole.ADMIN)
+        break;
+      case UserRole.LIBRARY_EMPLOYEE.toString():
+        this.userRole.next(UserRole.LIBRARY_EMPLOYEE)
         break;
       default:
         this.userRole.next(UserRole.GUEST)

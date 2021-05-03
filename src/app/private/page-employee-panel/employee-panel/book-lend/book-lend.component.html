@@ -1,0 +1,16 @@
+<div class="d-flex mt-3">
+    <div style="flex: 1;">
+        <h1>Lend a book</h1>
+        <div class="alert alert-success mt-1" role="alert">
+            Instructions: <br> 1) Make sure the browser has permissions to access your camera <br>
+             2) Place QR-code from the book so that it is visible for the camera<br>
+             3) You will be prompted once the value is read correctly.
+        </div>
+        <button class="btn btn-outline-success left-panel" style="width: 100%;" routerLink="/private/employee-panel">Back</button>
+        <div>Value read: {{valueRead}}</div>
+    </div>
+    <div style="flex: 1; padding: 2%">
+        <zxing-scanner #scanner (camerasFound)="camerasFoundHandler($event)" (scanSuccess)="scanSuccessHandler($event)"></zxing-scanner>
+    </div>
+</div>
+

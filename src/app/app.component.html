@@ -1,4 +1,5 @@
 <app-navbar [test]="isLoggedIn"></app-navbar>
 <div class="container">
+  <app-dialog-box *ngIf="dialogState$ | async as dialogState" [config]="dialogState"></app-dialog-box>
   <router-outlet></router-outlet>
 </div>

@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BookDetailsComponent } from './common/book-details/book-details.component';
+import { PageBookAddComponent } from './private/page-employee-panel/employee-panel/book-add/book-add.component';
+import { PageBookLendComponent } from './private/page-employee-panel/employee-panel/book-lend/book-lend.component';
+import { PageBookReturnComponent } from './private/page-employee-panel/employee-panel/book-return/book-return.component';
 import { PageAdminPanelComponent } from './private/page-admin-panel/page-admin-panel.component';
 import { PageEmployeePanelComponent } from './private/page-employee-panel/page-employee-panel.component';
 import { PageUserPanelComponent } from './private/page-user-panel/page-user-panel.component';
@@ -21,6 +24,9 @@ export const routes: Routes = [
   { path: 'search-results/:id', component: PageSearchResultsComponent},
   { path: 'access-denied', component: AccessDeniedComponent},
   { path: 'private/employee-panel', component: PageEmployeePanelComponent, canActivate: [AuthGuard, EmployeeAuthGuard ]},
+  { path: 'private/employee-panel/book-add', component: PageBookAddComponent, canActivate: [AuthGuard, EmployeeAuthGuard]},
+  { path: 'private/employee-panel/book-return', component: PageBookReturnComponent, canActivate: [AuthGuard, EmployeeAuthGuard]},
+  { path: 'private/employee-panel/book-lend', component: PageBookLendComponent, canActivate: [AuthGuard, EmployeeAuthGuard]},
   { path: 'private/admin-panel', component: PageAdminPanelComponent, canActivate: [AuthGuard, AdminAuthGuard]},
   { path: 'private/user-panel', component: PageUserPanelComponent, canActivate: [AuthGuard, RegisteredUserAuthGuard ]}
 ]

@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 import { Subscription } from 'rxjs';
+import { DialogService } from './services/dialog-service.service';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +14,11 @@ export class AppComponent implements OnInit, OnDestroy {
   testValue = "this is a test";
   isLoggedIn?: number;
   subscription?: Subscription;
+  dialogState$ = this.dialogService.currentDialogStateAction$;
   
-  constructor(private login: LoginService) {}
+  constructor(private login: LoginService,
+              private dialogService: DialogService
+              ) {}
 
 
   ngOnInit(): void {
