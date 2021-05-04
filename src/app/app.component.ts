@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 import { Subscription } from 'rxjs';
 import { DialogService } from './services/dialog-service.service';
+import { SpinnerService } from './services/spinner-service.service';
 
 @Component({
   selector: 'app-root',
@@ -15,9 +16,11 @@ export class AppComponent implements OnInit, OnDestroy {
   isLoggedIn?: number;
   subscription?: Subscription;
   dialogState$ = this.dialogService.currentDialogStateAction$;
+  spinnerState$ = this.SpinnerService.currentSpinnerStateAction$;
   
   constructor(private login: LoginService,
-              private dialogService: DialogService
+              private dialogService: DialogService,
+              private SpinnerService: SpinnerService
               ) {}
 
 

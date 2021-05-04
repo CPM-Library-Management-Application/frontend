@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BookService } from 'src/app/services/book.service';
 
 @Component({
   selector: 'app-page-search-results',
@@ -7,15 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageSearchResultsComponent implements OnInit {
 
-  selectedBook:any = null;
 
-  constructor() { }
+
+  constructor(private bookService: BookService) { }
 
   ngOnInit(): void {
   }
 
   selectedBookEvent(book:any){
-    this.selectedBook = book;
+ 
   }
 
 }

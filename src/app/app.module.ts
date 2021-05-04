@@ -27,6 +27,7 @@ import { PageBookReturnComponent } from './private/page-employee-panel/employee-
 import { PageBookAddComponent } from './private/page-employee-panel/employee-panel/book-add/book-add.component';
 import { DialogBoxComponent } from './common/dialog-box/dialog-box.component';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { SpinnerComponent } from './common/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
     PageBookLendComponent,
     PageBookReturnComponent,
     PageBookAddComponent,
-    DialogBoxComponent
+    DialogBoxComponent,
+    SpinnerComponent
   ],
   imports: [
     CommonModule,
