@@ -20,9 +20,9 @@ export class LoginService {
     //Api request goes here
     // this.updateLoginState.emit("new message");
     setTimeout(() => {
-      localStorage.setItem('loginState', UserRole.LIBRARY_EMPLOYEE.toString());
+      localStorage.setItem('loginState', UserRole.REGISTERED.toString());
       //Mock value, to be changed depending on the api response.
-      this.userRole.next(UserRole.LIBRARY_EMPLOYEE);
+      this.userRole.next(UserRole.REGISTERED);
     },1200);
   }
   logout(){
