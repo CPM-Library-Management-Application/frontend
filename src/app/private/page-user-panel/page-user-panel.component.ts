@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageUserPanelComponent implements OnInit {
 
+  userBooks:string[] = ["Great Gastby","Oliver Twist", "Romeo and Juliet","Zero to One","Crazy is a Compliment"]
+
   constructor() { }
 
   ngOnInit(): void {

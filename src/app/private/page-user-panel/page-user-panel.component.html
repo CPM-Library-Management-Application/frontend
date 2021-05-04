@@ -1,1 +1,12 @@
-<p>page-user-panel works!</p>
+<div class="row mt-4">
+    <div class="col-md-12">
+        <h3>My books</h3>
+    </div>
+</div>
+
+<div class="row" style="padding: 20px;background-color: #EAE6E6; min-height: 50px; gap: 30px 0;">
+    <div *ngFor="let book of userBooks" class="col-md-3 text-center" style="height: 60px;
+    align-items: center; display: flex; justify-content: center;">
+        <a [routerLink]="['/private/user-panel',123]" style="background: burlywood; padding: 20px 40px;">{{book}}</a>
+    </div>
+</div>
