@@ -27,7 +27,9 @@ import { PageBookReturnComponent } from './private/page-employee-panel/employee-
 import { PageBookAddComponent } from './private/page-employee-panel/employee-panel/book-add/book-add.component';
 import { DialogBoxComponent } from './common/dialog-box/dialog-box.component';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { SpinnerComponent } from './common/spinner/spinner.component';
 import { PageBookBorrowingTransactionDetailsComponent } from './private/page-book-borrowing-transaction-details/page-book-borrowing-transaction-details.component';
+
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { PageBookBorrowingTransactionDetailsComponent } from './private/page-boo
     PageBookReturnComponent,
     PageBookAddComponent,
     DialogBoxComponent,
+    SpinnerComponent
     PageBookBorrowingTransactionDetailsComponent,
+
   ],
   imports: [
     CommonModule,

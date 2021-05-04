@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { EMPTY } from 'rxjs';
+import { EMPTY, Observable, ObservableInput } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { BookService } from 'src/app/services/book.service';
 
@@ -11,6 +11,8 @@ import { BookService } from 'src/app/services/book.service';
 })
 export class BookDetailsComponent implements OnInit {
   @Input("book") book:any = null;
+  @Input() hideReserveButton: boolean = false;
+  @Input() bookObservable!: number;
 
   selectedBook$ = this.bookService.selectedBook$
     .pipe(
