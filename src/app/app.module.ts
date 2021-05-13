@@ -1,7 +1,8 @@
+import { EditEmployeeComponent } from './private/page-admin-panel/employees/edit-employee.component';
 import { Input, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'
-
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './common/navbar/navbar.component';
 import { PageHomeComponent } from './public/page-home/page-home.component';
@@ -30,6 +31,7 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { SpinnerComponent } from './common/spinner/spinner.component';
 import { PageBookBorrowingTransactionDetailsComponent } from './private/page-book-borrowing-transaction-details/page-book-borrowing-transaction-details.component';
 
+import { LibraryService } from './private/page-admin-panel/libraries/library.service';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,7 @@ import { PageBookBorrowingTransactionDetailsComponent } from './private/page-boo
     SpinnerComponent,
     PageBookBorrowingTransactionDetailsComponent,
 
+    EditEmployeeComponent
   ],
   imports: [
     CommonModule,
@@ -66,7 +69,8 @@ import { PageBookBorrowingTransactionDetailsComponent } from './private/page-boo
     ZXingScannerModule
   ],
   providers: [
-    BookService
+    BookService,
+    LibraryService
   ],
   bootstrap: [AppComponent]
 })

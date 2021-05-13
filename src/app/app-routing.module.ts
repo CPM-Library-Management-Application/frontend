@@ -1,5 +1,5 @@
+import { EditEmployeeComponent } from './private/page-admin-panel/employees/edit-employee.component';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import { BookDetailsComponent } from './common/book-details/book-details.component';
 import { PageBookAddComponent } from './private/page-employee-panel/employee-panel/book-add/book-add.component';
 import { PageBookLendComponent } from './private/page-employee-panel/employee-panel/book-lend/book-lend.component';
@@ -17,6 +17,8 @@ import { AuthGuard } from './services/auth-guard.service';
 import { EmployeeAuthGuard } from './services/employee-auth-guard.service';
 import { RegisteredUserAuthGuard } from './services/registered-user-auth-guard.service';
 import { PageBookBorrowingTransactionDetailsComponent } from './private/page-book-borrowing-transaction-details/page-book-borrowing-transaction-details.component';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
+
 
 export const routes: Routes = [
   { path: '', component: PageHomeComponent },
@@ -30,13 +32,16 @@ export const routes: Routes = [
   { path: 'private/employee-panel/book-lend', component: PageBookLendComponent, canActivate: [AuthGuard, EmployeeAuthGuard]},
   { path: 'private/admin-panel', component: PageAdminPanelComponent, canActivate: [AuthGuard, AdminAuthGuard]},
   { path: 'private/user-panel', component: PageUserPanelComponent, canActivate: [AuthGuard, RegisteredUserAuthGuard ]},
-  { path: 'private/user-panel/:transactionId', component: PageBookBorrowingTransactionDetailsComponent, canActivate: [AuthGuard, RegisteredUserAuthGuard ]}
-]
+  { path: 'private/user-panel/:transactionId', component: PageBookBorrowingTransactionDetailsComponent, canActivate: [AuthGuard, RegisteredUserAuthGuard ]},
+  { path: 'private/admin-panel/listoflibraries', component: PageAdminPanelComponent, canActivate: [AuthGuard, AdminAuthGuard]},
+  { path: 'private/admin-panel/editemployee/:id', component: EditEmployeeComponent,canActivate: [AuthGuard, AdminAuthGuard] },
+  { path: '', redirectTo: 'employees', pathMatch: 'full' },
+ 
+]  
 
 @NgModule({
   exports: [RouterModule],
-  imports: [
-    RouterModule.forRoot(routes)
+  imports: [RouterModule.forRoot(routes)
   ]
 })
 export class AppRoutingModule { }

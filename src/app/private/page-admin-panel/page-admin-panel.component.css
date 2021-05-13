@@ -1,0 +1,10 @@
+.col-1 {
+    float: left;
+    width: 50%;
+    height: 200px;
+ }
+ .col-2 {
+    float: right;
+    width: 50%;
+    height: 200px;
+ }
