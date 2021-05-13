@@ -52,7 +52,7 @@ import { PageBookBorrowingTransactionDetailsComponent } from './private/page-boo
     PageBookReturnComponent,
     PageBookAddComponent,
     DialogBoxComponent,
-    SpinnerComponent
+    SpinnerComponent,
     PageBookBorrowingTransactionDetailsComponent,
 
   ],

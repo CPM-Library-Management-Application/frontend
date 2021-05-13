@@ -19,6 +19,7 @@ export class LoginService {
   private userRoleSubject: BehaviorSubject<number>;
   public currentLoginState: Observable<number>;
 
+  private MOCK_TEMPORARY_LOGIN_USER_RIGHTS = UserRole.ADMIN;
 
   constructor(
     private router: Router,
@@ -36,8 +37,8 @@ export class LoginService {
     
     return this.httpClient.post<TokenDto>(this.LOGIN_URL,{ username: username, password: password})
       .pipe(map(token => {
-        localStorage.setItem('loginState', UserRole.LIBRARY_EMPLOYEE.toString());
-        this.userRoleSubject.next(UserRole.LIBRARY_EMPLOYEE);
+        localStorage.setItem('loginState', this.MOCK_TEMPORARY_LOGIN_USER_RIGHTS.toString());
+        this.userRoleSubject.next(this.MOCK_TEMPORARY_LOGIN_USER_RIGHTS);
         console.log(token);
       }))
     

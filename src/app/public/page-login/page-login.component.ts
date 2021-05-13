@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 import { SpinnerService } from 'src/app/services/spinner-service.service';
 import { DialogService } from 'src/app/services/dialog-service.service';
 
-import { Router } from '@angular/router';
 
 
 @Component({
