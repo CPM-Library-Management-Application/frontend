@@ -29,7 +29,11 @@ export class NavbarComponent implements OnInit {
   }
 
   logoutButtonHandler(){
-    this.login.logout();
+    this.login.logout()
+      .subscribe(
+        data => console.log('ok'),
+        error => console.log('error')
+      )
   }
 
 

@@ -5,7 +5,7 @@
         <div class="mb-2"> Info: {{ config.message }} </div>
         <div>
             <button class="btn btn-secondary" [class]="{'mr-3':config.isSuccess}" (click)="closeButtonHandler()">Close</button>
-            <button class="ml-3 btn btn-success" *ngIf="config.isSuccess" (click)="printButtonHandler()">Print</button>
+            <button class="ml-3 btn btn-success" *ngIf="config.isSuccess && config.qrCodeUrl != null" (click)="printButtonHandler()">Print</button>
         </div>
     </div>
 </div>

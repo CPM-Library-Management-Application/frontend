@@ -3,7 +3,7 @@ import { Token } from '@angular/compiler/src/ml_parser/lexer';
 import { Injectable, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { map, take, tap } from 'rxjs/operators';
+import { finalize, map, take, tap } from 'rxjs/operators';
 import { UserRole } from 'src/app/enums/user-role';
 import { environment } from 'src/environments/environment.prod';
 
@@ -12,7 +12,9 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class LoginService {
 
-  private LOGIN_URL = environment.API_URL + '/account/token/';
+  private LOGIN_URL = environment.API_URL + '/login/';
+  private LOGOUT_URL = environment.API_URL + '/logout/';
+  private REGISTER_URL = environment.API_URL + '/register/';
 
   private jwtSubject: Subject<TokenDto>;
   public jwt$: Observable<TokenDto>;
@@ -35,7 +37,9 @@ export class LoginService {
 
   login(username: string, password: string){
     
-    return this.httpClient.post<TokenDto>(this.LOGIN_URL,{ username: username, password: password})
+    return this.httpClient.post<TokenDto>(this.LOGIN_URL,
+      { email: username, password: password},
+      {observe: 'response', withCredentials: true})
       .pipe(map(token => {
         localStorage.setItem('loginState', this.MOCK_TEMPORARY_LOGIN_USER_RIGHTS.toString());
         this.userRoleSubject.next(this.MOCK_TEMPORARY_LOGIN_USER_RIGHTS);
@@ -62,12 +66,29 @@ export class LoginService {
   }
   logout(){
     //Timeouts are mock, just to simulate api request for now. To be changed soon.
-    setTimeout(() => {
-    this.router.navigate(['/'])
     localStorage.removeItem('loginState');
     this.userRoleSubject.next(UserRole.GUEST);
-    },1300); 
+    return this.httpClient.post(this.LOGOUT_URL,{})
+      .pipe(
+        finalize(() => {
+          console.log('logout completed');
+          this.router.navigate(['/']);
+        })
+      );
   }
+  register(username: string, password: string, email: string){
+    return this.httpClient.post(this.REGISTER_URL,{
+      username: username, 
+      password: password,
+      email: email
+    })
+    .pipe(
+      finalize(() => {
+        console.log('registered');
+      })
+    )
+  }
+
   checkStateOnRefresh(){
     //TODO: more cases 
     if(localStorage.getItem('loginState') == UserRole.REGISTERED.toString()){
