@@ -15,6 +15,7 @@ export class LoginService {
   private LOGIN_URL = environment.API_URL + '/login/';
   private LOGOUT_URL = environment.API_URL + '/logout/';
   private REGISTER_URL = environment.API_URL + '/register/';
+  private USER_INFO_URL = environment.API_URL + '/user/';
 
   private jwtSubject: Subject<TokenDto>;
   public jwt$: Observable<TokenDto>;
@@ -87,6 +88,12 @@ export class LoginService {
         console.log('registered');
       })
     )
+  }
+  getUserInfo(){
+    return this.httpClient.get<any>(this.USER_INFO_URL)
+      .pipe(
+        finalize(() => console.log('ok'))
+      );
   }
 
   checkStateOnRefresh(){

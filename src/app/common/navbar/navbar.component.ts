@@ -21,6 +21,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(private login: LoginService) { }
  
+  userInfo$ = this.login.getUserInfo();
+
   ngOnInit(): void {
     this.subscription = this.login.currentLoginState.subscribe(userRole => this.userRole = userRole);
   }
