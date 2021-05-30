@@ -11,8 +11,7 @@
         </div>
        
         <div *ngIf="userRole! > 0" class="d-flex">
-          <span style="margin-right: 4%">Hello, John Kowalski</span>
-
+          <span style="margin-right: 4%" *ngIf="userInfo$ | async as userInfo">Hello, {{userInfo?.username}}</span>
           <div class="row" style="margin-right: 2%;">
             <div class="col">
               <div ngbDropdown class="d-inline-block">
