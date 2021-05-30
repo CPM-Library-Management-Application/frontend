@@ -3,6 +3,7 @@ import { Component, EventEmitter, OnInit, Output, OnDestroy, ChangeDetectionStra
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, combineLatest, EMPTY, Observable, Subject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { Book } from 'src/app/models/book';
 import { BookService } from 'src/app/services/book.service';
 
 @Component({
@@ -14,9 +15,18 @@ import { BookService } from 'src/app/services/book.service';
 export class ResultListComponent implements OnInit {
   // selectedBook: any = "";
   @Input() displayShowMore = false;
-  @Output("book-selected") bookSelected = new EventEmitter<any>();
+  @Output('book-selected') bookSelected = new EventEmitter<any>();
   selectedBook$ = this.bookService.selectedBook$;
   books$ = this.bookService.books$;
+  searchResults: Book[] = [];
+
+  @Input("book-query") set bookQuery(value: string){
+    if(value.trim() == '' || value == null || value == undefined){
+      return;
+    }
+
+    this.bookService.searchBook(value).subscribe((books)=> this.searchResults = books);
+  }
 
   constructor(private bookService: BookService, private route: ActivatedRoute, private router: Router) {  }
 

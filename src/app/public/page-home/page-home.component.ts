@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageHomeComponent implements OnInit {
 
+  searchTxt = '';
+
   constructor() { }
 
   ngOnInit(): void {

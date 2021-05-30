@@ -1,7 +1,9 @@
 export interface Book {
-    id: number,
-    title: string,
-    author: string,
-    description: string,
-    libraryId: string
+    book_id: number;
+    title: string;
+    author: string;
+    genre: string;
+    lease_expiration_date?: string;
+    current_owner?: string;
+    qrcode: string;
 }
