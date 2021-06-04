@@ -38,13 +38,27 @@ export class LoginService {
 
   login(username: string, password: string){
     
-    return this.httpClient.post<TokenDto>(this.LOGIN_URL,
+    return this.httpClient.post<any>(this.LOGIN_URL,
       { email: username, password: password},
       {observe: 'response', withCredentials: true})
-      .pipe(map(token => {
-        localStorage.setItem('loginState', this.MOCK_TEMPORARY_LOGIN_USER_RIGHTS.toString());
-        this.userRoleSubject.next(this.MOCK_TEMPORARY_LOGIN_USER_RIGHTS);
-        console.log(token);
+      .pipe(map(response => {
+        if(response.body?.is_staff === true){
+          localStorage.setItem('loginState', UserRole.LIBRARY_EMPLOYEE.toString());
+          // **TEMPORARY**     THIS NEEDS TO BE CHANGED ONCE ENDPOINT IS READY
+          var MOCK_TEMPORARY_EMPLOYEES_LIBRARY_ID = 1
+          localStorage.setItem('employees_library_id',MOCK_TEMPORARY_EMPLOYEES_LIBRARY_ID.toString());
+          // **END TEMPORARY** 
+          this.userRoleSubject.next(UserRole.LIBRARY_EMPLOYEE)
+        }else if(response.body.is_superuser === true){
+          localStorage.setItem('loginState', UserRole.ADMIN.toString());
+          this.userRoleSubject.next(UserRole.ADMIN);
+        }else if(response.body.is_superuser === false && response.body.is_staff === false){
+          localStorage.setItem('loginState', UserRole.REGISTERED.toString());
+          this.userRoleSubject.next(UserRole.REGISTERED);
+        }else{
+          alert('User rights not fetched correctly. ')
+        }
+        console.log(response);
       }))
     
     

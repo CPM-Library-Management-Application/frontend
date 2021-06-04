@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, OnInit, Output, OnDestroy, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, OnDestroy, ChangeDetectionStrategy, Input, SimpleChange, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, combineLatest, EMPTY, Observable, Subject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -18,17 +18,27 @@ export class ResultListComponent implements OnInit {
   @Output('book-selected') bookSelected = new EventEmitter<any>();
   selectedBook$ = this.bookService.selectedBook$;
   books$ = this.bookService.books$;
-  searchResults: Book[] = [];
+  // searchResults: Observable<any>;
+  searchResults$ = this.bookService.searchBook('');
+
+  results: Object | undefined;
+  searchTerm$ = new Subject<string>();
+
+
+
 
   @Input("book-query") set bookQuery(value: string){
     if(value.trim() == '' || value == null || value == undefined){
       return;
     }
-
-    this.bookService.searchBook(value).subscribe((books)=> this.searchResults = books);
+    console.log(value)
+    // this.bookService.searchBook(value).subscribe((books)=> {this.searchResults = books});
+    // this.bookService.searchBook(value).subscribe();
   }
 
-  constructor(private bookService: BookService, private route: ActivatedRoute, private router: Router) {  }
+  constructor(private bookService: BookService, private route: ActivatedRoute, private router: Router) { 
+
+   }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(
@@ -40,15 +50,18 @@ export class ResultListComponent implements OnInit {
       }
     );
   }
-
+  ngOnChanges(changes: SimpleChanges){
+    console.log(changes);
+  }
   ngOnDestroy(): void {
   }
 
   selectBook(book:any){
     console.log(book);
     // this.selectedBook = book;
-    this.bookService.selectedBookChanged(book.id);
-    this.router.navigate(['search-results',book.id]);
+    this.bookService.selectedBookChanged(book.book_id);
+    this.bookService.selectedBookChangedData(book);
+    this.router.navigate(['search-results',book.book_id]);
     // this.bookSelected.emit(this.selectedBook);
   }
 

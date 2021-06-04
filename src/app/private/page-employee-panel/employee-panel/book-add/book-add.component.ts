@@ -36,7 +36,7 @@ export class PageBookAddComponent implements OnInit {
 
   async addBookButtonHandler(form: any){
     console.log(form);
-    let book = {title: form.value.title, author: form.value.author , genre: form.value.genre, library_id: "2"};
+    let book = {title: form.value.title, author: form.value.author , genre: form.value.genre, library_id: localStorage.getItem('employees_library_id')};
     let addBookRequest = this.bookService.addBook(book).toPromise();
     await addBookRequest.then((response) => {
         console.log(response)

@@ -32,6 +32,7 @@ import { SpinnerComponent } from './common/spinner/spinner.component';
 import { PageBookBorrowingTransactionDetailsComponent } from './private/page-book-borrowing-transaction-details/page-book-borrowing-transaction-details.component';
 
 import { LibraryService } from './private/page-admin-panel/libraries/library.service';
+import { ResultListWithsearchComponent } from './common/result-list-withsearch/result-list-withsearch.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { LibraryService } from './private/page-admin-panel/libraries/library.ser
     SpinnerComponent,
     PageBookBorrowingTransactionDetailsComponent,
 
-    EditEmployeeComponent
+    EditEmployeeComponent,
+     ResultListWithsearchComponent
   ],
   imports: [
     CommonModule,

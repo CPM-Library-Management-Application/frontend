@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest, Observable, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, Subject, throwError } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment.prod';
 import { Book } from '../models/book';
 
@@ -10,16 +10,23 @@ import { Book } from '../models/book';
 })
 export class BookService {
   // MOCK DATA
-  private url = 'http://jsonplaceholder.typicode.com/posts';
+  private BOOK_GET_ALL_URL = environment.API_URL + '/books/getall/';
   private BOOK_ADD_URL = environment.API_URL + '/books/';
-  private BOOK_SEARCH_URL = this.BOOK_ADD_URL+'search';
+  private BOOK_SEARCH_URL = environment.API_URL + '/books/search';
   constructor(private http: HttpClient) { }
+  
+  public searchResults: any;
 
-  private bookSelectedSubject = new BehaviorSubject<number>(1);
+  results!: BookResult[];
+
+  private bookSelectedSubject = new BehaviorSubject<number>(0);
   bookSelectedAction$ = this.bookSelectedSubject.asObservable();
 
+  private bookSelectedFullDataSubject = new Subject<BookResult>()
+  bookSelectedFullDataAction$ = this.bookSelectedFullDataSubject.asObservable();
+
   // TO DO !!! change any[] -> Book[] but only when we connect to our api since this mock api does not have 'description' property
-  books$ = this.http.get<any[]>(this.url)
+  books$ = this.http.get<any[]>(this.BOOK_GET_ALL_URL)
     .pipe(
       // tap(data => console.log(JSON.stringify(data))),
       map(books => 
@@ -33,7 +40,7 @@ export class BookService {
       this.bookSelectedAction$
   ]) .pipe(
         map(([books, selectedBookId])=>
-          books.find(book => book.id == selectedBookId)),
+          books.find((book: any) => book.id == selectedBookId)),
         tap(book => console.log('selected book: ', book))
       );
 
@@ -41,19 +48,57 @@ export class BookService {
   private singleBookSubject = new BehaviorSubject<Book>({book_id: 3,  title:"the book title", author: "john smith",genre:"awesome",qrcode:"qr"});
   singleBook$ = this.singleBookSubject.asObservable();
 
-  selectedBookChanged(selectedBookId: number):void {
-    console.log('Book id: ' + selectedBookId)
-    this.bookSelectedSubject.next(selectedBookId);
+  selectedBookChanged(bookId:number):void {
+    console.log('Book id: ' + bookId)
+    this.bookSelectedSubject.next(bookId);
+  }
+  selectedBookChangedData(book: BookResult):void {
+    console.log(book);
+    this.bookSelectedFullDataSubject.next(book);
   }
 
-  searchBook(query: string): Observable<Book[]>{
-    return this.http.get<Book[]>(this.BOOK_SEARCH_URL,{params:{query}});
+  searchBook(query: string): Observable<any[]>{
+    return this.http.get<any[]>(this.BOOK_SEARCH_URL,{params:{query}})
+    .pipe(
+      tap(data => console.log(JSON.stringify(data))),
+      map(books => {
+        console.log(books);
+        return this.searchResults = books;
+      }
+    ));
   }
-
-
 
   addBook(book: any):Observable<any>{
     return this.http.post<Book>(this.BOOK_ADD_URL,book);
   }
   
+//===== TEST
+  
+  searchTerm$ = new BehaviorSubject<string>('');
+
+  search(terms: Observable<string>) {
+    return terms.pipe(
+      debounceTime(400),
+      distinctUntilChanged(),
+      switchMap(term => this.searchEntries(term))
+    )
+  }
+  searchEntries(query: any){
+    return this.http.get<any>(this.BOOK_SEARCH_URL,{params:{query}})
+      .pipe(
+        tap(res => console.log(JSON.stringify(res)))
+      )
+  }
+
+
+}
+
+export interface BookResult{
+  book_id: number;
+  author: string;
+  title: string;
+  genre: string;
+  lease_expiration_date: string;
+  current_owner: string;
+  qrcode: string;
 }

@@ -14,7 +14,7 @@ export class BookDetailsComponent implements OnInit {
   @Input() hideReserveButton: boolean = false;
   @Input() bookObservable!: number;
 
-  selectedBook$ = this.bookService.selectedBook$
+  selectedBook$ = this.bookService.bookSelectedFullDataAction$
     .pipe(
       catchError(err => {
         return EMPTY;
