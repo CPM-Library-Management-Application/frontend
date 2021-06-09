@@ -2,13 +2,14 @@
     <div class="mb-3 mt-5 p-5">
         <div class="d-flex justify-content-center">
             <div class="d-flex justify-content-center" style="width:100%;">
-                <input name="search" [(ngModel)]="searchTxt" placeholder="I'm searching for a book..." type="text" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
+                <input name="booksearch" [(ngModel)]="searchTxt" (keyup)="handleOnKeyUpInput($event)" placeholder="I'm searching for a book..." type="text" class="form-control" id="bookSearchInput" aria-describedby="emailHelp">
             </div>
         </div>
     </div>
 </form>
-<div class=" d-flex" style="justify-content: center;">
-    <div>
-        <app-result-list [book-query]="searchTxt" [displayShowMore]="true"></app-result-list>
+<div class=" d-flex" style="justify-content: center; width: 100%">
+    <div style="width: 100%; justify-content: center;" class="d-flex">
+        <!-- <app-result-list [book-query]="searchTxt" [displayShowMore]="true"></app-result-list> -->
+        <app-result-list-withsearch style="width:56.5%;"></app-result-list-withsearch>
     </div>
 </div>

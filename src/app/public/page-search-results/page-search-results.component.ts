@@ -8,15 +8,26 @@ import { BookService } from 'src/app/services/book.service';
 })
 export class PageSearchResultsComponent implements OnInit {
 
-
-
-  constructor(private bookService: BookService) { }
+  searchTerm$ = this.bookService.searchTerm$;
+  isLoggedIn: boolean;
+  constructor(private bookService: BookService) { 
+    if(localStorage.getItem('loginState')){
+      this.isLoggedIn = true;
+    }else{
+      this.isLoggedIn = false;
+    }
+    console.log(this.isLoggedIn);
+  }
 
   ngOnInit(): void {
   }
 
   selectedBookEvent(book:any){
  
+  }
+  handleKeyUpInput(event: KeyboardEvent){
+    const target = event.target as HTMLInputElement;
+    this.searchTerm$.next(target.value);
   }
 
 }

@@ -1,0 +1,10 @@
+{
+"/api": {
+    "target": "https://libraryproject.thatsbartek.com/api",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    }
+  }
+}

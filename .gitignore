@@ -1,4 +1,10 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
+#Mine
+firebase-debug.log
+frontend05.tar
+frontend052.tar
+frontend059.tar
+frontend062.tar
 
 # compiled output
 /dist
@@ -6,6 +12,9 @@
 /out-tsc
 # Only exists if Bazel was run
 /bazel-out
+
+#API keys and variables
+./environments/environment.prod.ts
 
 # dependencies
 /node_modules
