@@ -34,6 +34,10 @@ import { PageBookBorrowingTransactionDetailsComponent } from './private/page-boo
 import { LibraryService } from './private/page-admin-panel/libraries/library.service';
 import { ResultListWithsearchComponent } from './common/result-list-withsearch/result-list-withsearch.component';
 import { LeafletMapComponent } from './common/leaflet-map/leaflet-map.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
+
+
 
 @NgModule({
   declarations: [
@@ -58,6 +62,7 @@ import { LeafletMapComponent } from './common/leaflet-map/leaflet-map.component'
     DialogBoxComponent,
     SpinnerComponent,
     PageBookBorrowingTransactionDetailsComponent,
+    
 
     EditEmployeeComponent,
      ResultListWithsearchComponent,
@@ -70,7 +75,9 @@ import { LeafletMapComponent } from './common/leaflet-map/leaflet-map.component'
     FormsModule,
     HttpClientModule,
     NgbModule,
-    ZXingScannerModule
+    ZXingScannerModule,
+    NoopAnimationsModule,
+    MatCardModule
   ],
   providers: [
     BookService,

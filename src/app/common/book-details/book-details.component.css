@@ -1,7 +1,6 @@
 .book-details-container {
-    background-color: rgb(228, 223, 216);
     min-height: 200px;
-    padding: 15px 30px;
+    /* padding: 15px 30px; */
 }
 
 .no-content {

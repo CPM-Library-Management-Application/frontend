@@ -106,7 +106,8 @@ export class LoginService {
   getUserInfo(){
     return this.httpClient.get<any>(this.USER_INFO_URL)
       .pipe(
-        finalize(() => console.log('ok'))
+        tap((x) => console.log(x)),
+        finalize(() => {console.log('ok')})
       );
   }
 
