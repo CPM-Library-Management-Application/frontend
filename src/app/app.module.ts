@@ -33,6 +33,7 @@ import { PageBookBorrowingTransactionDetailsComponent } from './private/page-boo
 
 import { LibraryService } from './private/page-admin-panel/libraries/library.service';
 import { ResultListWithsearchComponent } from './common/result-list-withsearch/result-list-withsearch.component';
+import { LeafletMapComponent } from './common/leaflet-map/leaflet-map.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { ResultListWithsearchComponent } from './common/result-list-withsearch/r
     PageBookBorrowingTransactionDetailsComponent,
 
     EditEmployeeComponent,
-     ResultListWithsearchComponent
+     ResultListWithsearchComponent,
+     LeafletMapComponent
   ],
   imports: [
     CommonModule,

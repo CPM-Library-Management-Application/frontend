@@ -45,7 +45,7 @@ export class BookService {
       );
 
         // Mock service
-  private singleBookSubject = new BehaviorSubject<Book>({book_id: 3,  title:"the book title", author: "john smith",genre:"awesome",qrcode:"qr"});
+  private singleBookSubject = new BehaviorSubject<Book>({book_id: 3,  title:"the book title", author: "john smith",genre:"awesome",qrcode:"qr", library_id: null});
   singleBook$ = this.singleBookSubject.asObservable();
 
   selectedBookChanged(bookId:number):void {
@@ -101,4 +101,5 @@ export interface BookResult{
   lease_expiration_date: string;
   current_owner: string;
   qrcode: string;
+  library_id: any;
 }

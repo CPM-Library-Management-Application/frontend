@@ -6,4 +6,5 @@ export interface Book {
     lease_expiration_date?: string;
     current_owner?: string;
     qrcode: string;
+    library_id: any;
 }
