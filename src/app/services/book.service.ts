@@ -14,6 +14,9 @@ export class BookService {
   private BOOK_ADD_URL = environment.API_URL + '/books/';
   private BOOK_SEARCH_URL = environment.API_URL + '/books/search';
   private BOOK_RESERVE_URL = environment.API_URL + '/books';
+  private BOOK_GET_INFO_URL = environment.API_URL + '/books/';
+
+
   constructor(private http: HttpClient) { }
   
   public searchResults: any;
@@ -70,7 +73,8 @@ export class BookService {
   }
 
   addBook(book: any):Observable<any>{
-    return this.http.post<Book>(this.BOOK_ADD_URL,book);
+    let bookToAdd = {...book, current_owner_id: 1};
+    return this.http.post<Book>(this.BOOK_ADD_URL,bookToAdd);
   }
   
   reserveBook(book:any, user: any):Observable<any>{
@@ -78,6 +82,14 @@ export class BookService {
       user: user
     }
     return this.http.post<any>(this.BOOK_RESERVE_URL + '/' + book.book_id + '/reserve',payload);
+  }
+
+  getBookInfo(id: number):Observable<any>{
+    return this.http.get<any>(this.BOOK_GET_INFO_URL + id);
+  }
+
+  leaseBook(book:any):Observable<any>{
+    return this.http.post<any>(this.BOOK_RESERVE_URL + '/' + book.book_id + '/lease',{});
   }
   
 //===== TEST

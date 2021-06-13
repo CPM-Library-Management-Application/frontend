@@ -25,6 +25,7 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
         return EMPTY;
       })
     )
+
   constructor(private bookService: BookService, private loginService: LoginService) { }
   
   ngOnDestroy(): void {

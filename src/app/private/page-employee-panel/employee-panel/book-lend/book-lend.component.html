@@ -1,15 +1,28 @@
 <div class="d-flex mt-3">
     <div style="flex: 1;">
         <h1>Lend a book</h1>
+        <h2 *ngIf="currentStage === 0">Stage 1/3 - Scan Book's QR Code</h2>
+        <h2 *ngIf="currentStage === 1 && (userInfoFromQrCode === null || userInfoFromQrCode === undefined)">Stage 2/3 - Scan User's QR Code</h2>
+        <h2 *ngIf="currentStage === 1 && userInfoFromQrCode !== null && userInfoFromQrCode !== undefined">Stage 3/3 - Confirm Lease</h2>
         <div class="alert alert-success mt-1" role="alert">
             Instructions: <br> 1) Make sure the browser has permissions to access your camera <br>
              2) Place QR-code from the book so that it is visible for the camera<br>
              3) You will be prompted once the value is read correctly.
         </div>
-        <app-book-details [hideReserveButton]="true"></app-book-details>
-        <button class="btn btn-outline-success left-panel mt-3" style="width: 100%;" routerLink="/private/employee-panel">Back</button>
-        <div>Value read: {{valueRead}}</div>
-       
+        <div *ngIf="bookInfoFromQrCode">
+            <mat-card>
+                <h4>Title: {{bookInfoFromQrCode.title}}</h4>
+                <h4>Author: {{bookInfoFromQrCode.author}}</h4>
+                <h4>Book data: READY</h4>
+                <h4>User data: <span *ngif="currentStage === 1">NOT READY</span><span *ngIf="currentStage === 1 && userInfoFromQrCode !== null && userInfoFromQrCode !== undefined">READY</span></h4>
+            </mat-card>
+            <button
+                class="btn btn-success left-panel mt-3" 
+                style="width: 100%;"
+                (click)="handleProceedButtonClick()"
+                >Proceed</button>
+        </div>
+        <button class="btn btn-outline-success left-panel mt-3" style="width: 100%;" routerLink="/private/employee-panel">Back</button>       
     </div>
     <div style="flex: 1; padding: 2%">
         <zxing-scanner 
