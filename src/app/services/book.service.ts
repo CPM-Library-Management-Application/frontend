@@ -91,6 +91,10 @@ export class BookService {
   leaseBook(book:any):Observable<any>{
     return this.http.post<any>(this.BOOK_RESERVE_URL + '/' + book.book_id + '/lease',{});
   }
+
+  returnBook(book:any):Observable<any>{
+    return this.http.post<any>(this.BOOK_RESERVE_URL + '/' + book.book_id + '/return', {}); 
+  }
   
 //===== TEST
   

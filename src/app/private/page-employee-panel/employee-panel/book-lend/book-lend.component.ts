@@ -1,4 +1,5 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, Input, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { Book } from 'src/app/models/book';
 import { BookService } from 'src/app/services/book.service';
@@ -27,17 +28,20 @@ export class PageBookLendComponent implements OnInit {
   userInfoFromQrCode: any;
   leaseExpirationDate: any;
   currentStage: number;
+  isLendComponent!: boolean;
 
   constructor(
     private dialogService: DialogService,
     private spinnerService: SpinnerService,
-    private bookService: BookService
+    private bookService: BookService,
+    private route: ActivatedRoute
     ) {
       this.currentStage = LEND_PROCESS_STAGE.readBookCode;
      }
 
   ngOnInit(): void {
-   
+    this.isLendComponent = this.route.snapshot.data['isLend'];
+    console.log('islend: ' + this.isLendComponent);
   }
   camerasFoundHandler($event: any){
     console.log($event);
@@ -75,15 +79,28 @@ export class PageBookLendComponent implements OnInit {
       this.currentStage = LEND_PROCESS_STAGE.readUserCode;
       this.spinnerService.hideSpinner();
     }else if (this.currentStage === LEND_PROCESS_STAGE.readUserCode){
-      this.bookService.leaseBook(this.bookInfoFromQrCode).subscribe((value) => {
-        console.log(value);
-        this.spinnerService.hideSpinner();
-        this.dialogService.displayDialog({message: 'Operation successfull. Lease Exipres on:' + value.lease_expiration_date,isSuccess: true, display: true})
-        this.bookInfoFromQrCode = null;
-        this.userInfoFromQrCode = null;
-        this.currentStage = LEND_PROCESS_STAGE.readBookCode;
-        this.leaseExpirationDate = null;
-      })
+      if(this.isLendComponent){
+        this.bookService.leaseBook(this.bookInfoFromQrCode).subscribe((value) => {
+          console.log(value);
+          this.spinnerService.hideSpinner();
+          this.dialogService.displayDialog({message: 'Operation successfull. Lease Exipres on:' + value.lease_expiration_date,isSuccess: true, display: true})
+          this.bookInfoFromQrCode = null;
+          this.userInfoFromQrCode = null;
+          this.currentStage = LEND_PROCESS_STAGE.readBookCode;
+          this.leaseExpirationDate = null;
+        })
+      }else{
+        this.bookService.returnBook(this.bookInfoFromQrCode).subscribe((value) => {
+          console.log(value);
+          this.spinnerService.hideSpinner();
+          this.dialogService.displayDialog({message: 'Operation successfull',isSuccess: true, display: true})
+          this.bookInfoFromQrCode = null;
+          this.userInfoFromQrCode = null;
+          this.currentStage = LEND_PROCESS_STAGE.readBookCode;
+          this.leaseExpirationDate = null;
+        })
+      }
+
     }
     
   }
