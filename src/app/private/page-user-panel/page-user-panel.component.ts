@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-page-user-panel',
@@ -9,9 +10,13 @@ export class PageUserPanelComponent implements OnInit {
 
   userBooks:string[] = ["Great Gastby","Oliver Twist", "Romeo and Juliet","Zero to One","Crazy is a Compliment"]
 
-  constructor() { }
+  constructor(private loginService: LoginService) { }
+  qrCodeUrl: any;
 
   ngOnInit(): void {
+    this.loginService.getUserInfo().subscribe((value) => {
+      this.qrCodeUrl = `http://localhost/api/media/user_qrcodes/qrcode${value.id}.png`
+    } )
   }
 
 }

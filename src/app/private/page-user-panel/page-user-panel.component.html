@@ -10,3 +10,7 @@
         <a [routerLink]="['/private/user-panel',123]" style="background: burlywood; padding: 20px 40px;">{{book}}</a>
     </div>
 </div>
+<mat-card style="width: 100%; text-align: center;">
+    <h3>Your personal identifier</h3>
+    <div *ngIf="qrCodeUrl"><img src={{qrCodeUrl}}/></div>
+</mat-card>

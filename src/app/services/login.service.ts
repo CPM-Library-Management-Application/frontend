@@ -16,6 +16,7 @@ export class LoginService {
   private LOGOUT_URL = environment.API_URL + '/logout/';
   private REGISTER_URL = environment.API_URL + '/register/';
   private USER_INFO_URL = environment.API_URL + '/user/';
+  // private USER_QRCODE_URL = environment.API_URL + '/media/user_qrcodes/';
 
   private jwtSubject: Subject<TokenDto>;
   public jwt$: Observable<TokenDto>;
@@ -164,6 +165,7 @@ export class LoginService {
     }
   }
 }
+
 
 
 interface TokenDto {
