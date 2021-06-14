@@ -24,7 +24,7 @@ export class DialogBoxComponent implements OnInit {
     this.dialogService.hideDialog();
   }
   printButtonHandler(){
-    window.open('/assets/qrcode.png', '_blank');
+    window.open(this.config.qrCodeUrl, '_blank');
   }
 
 }
