@@ -4,3 +4,15 @@
 .logo:focus {
     outline: 0;
 }
+.logo-label{
+    margin-left: 1rem;
+}
+@media(max-width:650px){
+    .logo{
+        font-size: Medium;
+        /* background-color: aqua; */
+    }
+    .logo-label{
+        display: none;
+    }
+}

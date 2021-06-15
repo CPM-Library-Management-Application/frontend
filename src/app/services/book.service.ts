@@ -13,6 +13,10 @@ export class BookService {
   private BOOK_GET_ALL_URL = environment.API_URL + '/books/getall/';
   private BOOK_ADD_URL = environment.API_URL + '/books/';
   private BOOK_SEARCH_URL = environment.API_URL + '/books/search';
+  private BOOK_RESERVE_URL = environment.API_URL + '/books';
+  private BOOK_GET_INFO_URL = environment.API_URL + '/books/';
+
+
   constructor(private http: HttpClient) { }
   
   public searchResults: any;
@@ -45,7 +49,7 @@ export class BookService {
       );
 
         // Mock service
-  private singleBookSubject = new BehaviorSubject<Book>({book_id: 3,  title:"the book title", author: "john smith",genre:"awesome",qrcode:"qr"});
+  private singleBookSubject = new BehaviorSubject<Book>({book_id: 3,  title:"the book title", author: "john smith",genre:"awesome",qrcode:"qr", library_id: null});
   singleBook$ = this.singleBookSubject.asObservable();
 
   selectedBookChanged(bookId:number):void {
@@ -69,7 +73,27 @@ export class BookService {
   }
 
   addBook(book: any):Observable<any>{
-    return this.http.post<Book>(this.BOOK_ADD_URL,book);
+    let bookToAdd = {...book, current_owner_id: 1};
+    return this.http.post<Book>(this.BOOK_ADD_URL,bookToAdd);
+  }
+  
+  reserveBook(book:any, user: any):Observable<any>{
+    let payload = {
+      user: user
+    }
+    return this.http.post<any>(this.BOOK_RESERVE_URL + '/' + book.book_id + '/reserve',payload);
+  }
+
+  getBookInfo(id: number):Observable<any>{
+    return this.http.get<any>(this.BOOK_GET_INFO_URL + id);
+  }
+
+  leaseBook(book:any):Observable<any>{
+    return this.http.post<any>(this.BOOK_RESERVE_URL + '/' + book.book_id + '/lease',{});
+  }
+
+  returnBook(book:any):Observable<any>{
+    return this.http.post<any>(this.BOOK_RESERVE_URL + '/' + book.book_id + '/return', {}); 
   }
   
 //===== TEST
@@ -101,4 +125,5 @@ export interface BookResult{
   lease_expiration_date: string;
   current_owner: string;
   qrcode: string;
+  library_id: any;
 }

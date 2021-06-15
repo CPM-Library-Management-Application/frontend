@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BookService } from 'src/app/services/book.service';
 import { DialogService } from 'src/app/services/dialog-service.service';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'page-app-book-add',
@@ -43,7 +44,7 @@ export class PageBookAddComponent implements OnInit {
         this.title = "";
         this.author = "";
         this.genre = this.genres[0];
-        this.dialogService.displayDialog({display: true, message: "Print the QR-Code and stick it onto the book.", isSuccess: true});
+        this.dialogService.displayDialog({display: true, message: "Print the QR-Code and stick it onto the book.", isSuccess: true, qrCodeUrl: environment.API_URL + response.qrcode});
       }).catch((error) => {
         this.dialogService.displayDialog({display: true, message: "Something went wron. Please try again", isSuccess: false});
       });

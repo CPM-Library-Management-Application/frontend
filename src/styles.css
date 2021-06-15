@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
-
+@import '../node_modules/leaflet/dist/leaflet.css';
 
 
 .my-navbar {
@@ -9,3 +9,5 @@
 .left-panel{
     height: 5rem;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
