@@ -12,10 +12,10 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class LoginService {
 
-  private LOGIN_URL = environment.API_URL + '/login/';
+  private LOGIN_URL = environment.API_URL + '/login';
   private LOGOUT_URL = environment.API_URL + '/logout/';
   private REGISTER_URL = environment.API_URL + '/register/';
-  private USER_INFO_URL = environment.API_URL + '/user/';
+  private USER_INFO_URL = environment.API_URL + '/user';
   // private USER_QRCODE_URL = environment.API_URL + '/media/user_qrcodes/';
 
   private jwtSubject: Subject<TokenDto>;
@@ -43,6 +43,7 @@ export class LoginService {
       { email: username, password: password},
       {observe: 'response', withCredentials: true})
       .pipe(map(response => {
+        localStorage.setItem('user_data',JSON.stringify(response.body));
         if(response.body?.is_staff === true){
           localStorage.setItem('loginState', UserRole.LIBRARY_EMPLOYEE.toString());
           // **TEMPORARY**     THIS NEEDS TO BE CHANGED ONCE ENDPOINT IS READY

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BookService } from 'src/app/services/book.service';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -8,15 +9,26 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class PageUserPanelComponent implements OnInit {
 
-  userBooks:string[] = ["Great Gastby","Oliver Twist", "Romeo and Juliet","Zero to One","Crazy is a Compliment"]
+  userBooks: any[] = [];
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private bookService: BookService) { }
   qrCodeUrl: any;
+
 
   ngOnInit(): void {
     this.loginService.getUserInfo().subscribe((value) => {
-      this.qrCodeUrl = `http://localhost/api/media/user_qrcodes/qrcode${value.id}.png`
-    } )
+      this.qrCodeUrl = `http://localhost/api/media/user_qrcodes/qrcode${value.id}.png`;
+    });
+
+    const userData = JSON.parse(localStorage.getItem('user_data') || '');
+
+    if (userData != null){
+      const id = (JSON.parse(atob(userData.jwt.split('.')[1]))).id;
+      this.bookService.viewUserBook(id).subscribe((books) => {
+        this.userBooks = books;
+      });
+    }
+
   }
 
 }

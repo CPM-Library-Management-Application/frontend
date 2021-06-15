@@ -15,6 +15,7 @@ export class BookService {
   private BOOK_SEARCH_URL = environment.API_URL + '/books/search';
   private BOOK_RESERVE_URL = environment.API_URL + '/books';
   private BOOK_GET_INFO_URL = environment.API_URL + '/books/';
+  private BOOK_GET_USER_BOOKS_URL = environment.API_URL + '/books/user/';
 
 
   constructor(private http: HttpClient) { }
@@ -59,6 +60,10 @@ export class BookService {
   selectedBookChangedData(book: BookResult):void {
     console.log(book);
     this.bookSelectedFullDataSubject.next(book);
+  }
+
+  viewUserBook(userId: string): Observable<any[]> {
+    return this.http.get<any[]>(this.BOOK_GET_USER_BOOKS_URL + userId);
   }
 
   searchBook(query: string): Observable<any[]>{

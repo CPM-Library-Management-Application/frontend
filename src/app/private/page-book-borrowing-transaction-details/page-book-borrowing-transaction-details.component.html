@@ -9,17 +9,21 @@
         <form>
             <div class="form-group">
                 <label for="frmBookTitle">Book Title</label>
-                <input type="text" readonly class="form-control-plaintext" id="frmBookTitle" value="Oliver Twist">
+                <input type="text" readonly class="form-control-plaintext" id="frmBookTitle" [value]="bookInfo.title">
+            </div>
+            <div class="form-group">
+                <label for="frmBookTitle">Book Author</label>
+                <input type="text" readonly class="form-control-plaintext" id="frmBookTitle" [value]="bookInfo.author">
             </div>
 
             <div class="form-group">
                 <label for="frmDueDate">Due Date</label>
-                <input type="text" readonly class="form-control-plaintext" id="frmDueDate" value="16 May 2021">
+                <input type="text" readonly class="form-control-plaintext" id="frmDueDate" [value]="bookInfo.lease_expiration_date||'-'">
             </div>
 
             <div class="form-group">
-                <label for="frmLibraryAdd">Library Address</label>
-                <input type="text" readonly class="form-control-plaintext" id="frmLibraryAdd" value="5th St.">
+                <label for="frmLibraryAdd">Library Name</label>
+                <input type="text" readonly class="form-control-plaintext" id="frmLibraryAdd" [value]="bookInfo.library_id.name">
             </div>
 
 
