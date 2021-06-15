@@ -1,4 +1,3 @@
-import { Employee } from './employees/employee.model';
 import { LibraryService } from './libraries/library.service';
 import { Library } from './libraries/library.model';
 import { Component, OnInit, Injectable } from '@angular/core';
@@ -14,72 +13,59 @@ import { Component, OnInit, Injectable } from '@angular/core';
 })
 
 export class PageAdminPanelComponent implements OnInit {
-  libraries: Library[];
+  libraries: any;
   libraryName: string;
-  libraryLocation: string;
+  libraryXCoordinate: number;
+  libraryYCoordinate: number;
   libraryID: number;
   currentLibraryIndex = -1;
-  currentEmployeeIndex = -1;
+  currentBookIndex = -1;
   currentLibraryID: number;
-  employees: Employee[];
-  employeeUsername: string;
-  employeePassword: string;
-  employeeEmail: string;
-  employeeID: number;
-  employeeRights: number;
-  currentEmployeeID: number;
-  selectedEmployee: Employee;
+  books: any;
   
 
   constructor (private libraryService: LibraryService){
-    this.libraries=this.libraryService.getLibraries();
+
+    this.refreshLibraries();
     this.libraryName = '';
-    this.libraryLocation = '';
+    this.libraryXCoordinate = 0.0;
+    this.libraryYCoordinate = 0.0;
     this.libraryID = 0;
     this.currentLibraryID = 0;
-    this.employees=[];
-    this.employeeUsername = '';
-    this.employeePassword = '';
-    this.employeeEmail = '';
-    this.employeeID = 0;
-    this.employeeRights = 0;
-    this.currentEmployeeID = 0;
-    this.selectedEmployee = new Employee('','','',0,1,0);
+    this.books=[];
+   
   
   }
 
-   setActiveLibrary(library: Library, index: number): void {
-    this.currentLibraryID = library.ID;
-    this.currentLibraryIndex = index;
-    this.employees = this.libraryService.getEmployees(library.ID);
-    this.currentEmployeeID = 0;
-    this.currentEmployeeIndex = -1;
+  refreshLibraries(){
+    this.libraryService.getLibraries().subscribe((libraries) => {
+      this.libraries = libraries;
+    });
   }
 
-   setActiveEmployee(employee: Employee, index: number): void {
-     this.currentEmployeeID = employee.ID;
-     this.currentEmployeeIndex = index;
-     this.selectedEmployee = this.libraryService.getEmployee(employee.ID)[0];
+   setActiveLibrary(library: Library, index: number): void {
+    this.currentLibraryID = library.library_id;
+    this.currentLibraryIndex = index;
+    this.libraryService.getLibraryBooks(library.library_id).subscribe((lib) => {
+      this.books = lib.books;
+    });
+    this.currentBookIndex = -1;
+  }
+
+   setActiveBook(book: any, index: number): void {
+     this.currentBookIndex = index;
    }
    
 
    addLibrary() : void {
-      this.libraryService.addLibrary(this.libraryName, this.libraryLocation, this.libraryID);
+      this.libraryService.addLibrary(this.libraryName, this.libraryXCoordinate, this.libraryYCoordinate).subscribe((lib)=> {
+        this.refreshLibraries();
+      });
    }
 
-   addEmployee() : void {
-    this.libraryService.addEmployee(this.employeeUsername, this.employeePassword, this.employeeEmail, this.employeeID, this.employeeRights, this.libraryID);
- }
 
-  deleteLibrary(): void {
-  this.libraryService.delete(this.currentLibraryID);
-   }
-
-   deleteEmployee(): void {
-    this.libraryService.delete(this.currentEmployeeID);
-   }
   ngOnInit(): void  {}
-  getEmployee(id: string): void {}
+  getBook(id: string): void {}
   getLibrary(id: string): void {} 
 }
 

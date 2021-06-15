@@ -1,13 +1,13 @@
 <hr>
 <h3>Welcome to Admin Panel!</h3>
-<p class="Welcome">Manage the resources of libraries and their employees.</p>
+<p class="Welcome">Manage the libraries.</p>
 <hr>
-  <h4>List of Libraries/Employees </h4>
+  <h4>List of Libraries/Books </h4>
 <br/>
 
 <th> Name/ </th>    
-<th> Location/ </th> 
-<th> ID </th> 
+<th> X Coordinate/ </th> 
+<th> Y Coordinate </th> 
 <br>
 <div class="row">
   <div class="col-md-6">  
@@ -19,8 +19,8 @@
    (click)="setActiveLibrary(library, i)"
   >
       <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1"> {{ library.name }}</h5> {{ library.ID }} </div>
-      <small>  {{ library.location }} </small>
+      <h5 class="mb-1"> {{ library.name }}</h5> </div>
+      <small> <b>X:</b> {{ library.x_coordinate }} <b> Y:</b> {{ library.y_coordinate }} </small>
 
     </li></ul> 
     <br/> <br/>
@@ -29,43 +29,19 @@
   <ul class="list-group">
     <li
       class="list-group-item"
-      *ngFor="let employee of employees; let i = index"
-      [class.active]="i == currentEmployeeIndex"
-      (click)="setActiveEmployee(employee, i)"
+      *ngFor="let book of books; let i = index"
+      [class.active]="i == currentBookIndex"
+      (click)="setActiveBook(book, i)"
     >
-      {{ employee.Username }}
+      {{ book.author }}
     
-      {{ employee.ID }}
+      {{ book.title }}
+
+      {{ book.genre }}
     
     </li>
   </ul>
-  
-  <div *ngIf="currentEmployeeID >= 1">
-    <div> 
-      <label><strong>Username:</strong></label> 
-     {{ selectedEmployee.Username }} 
-    </div>
-    <div>
-      <label><strong>Password:</strong></label>
-      {{ selectedEmployee.Password }}
-    </div>
-    <div>
-      <label><strong>Email:</strong></label>
-      {{ selectedEmployee.Email }}
-    </div>
-    <div>
-      <label><strong>ID:</strong></label>
-      {{ selectedEmployee.ID }}
-    </div>
-    <label><strong>Rights:</strong></label>
-    {{ selectedEmployee.Rights }}
-  </div>
 
-  <div *ngIf="currentEmployeeID >= 1">
-    <a class="badge badge-warning" routerLink="/private/admin-panel/editemployee/{{currentEmployeeID}}" >Edit
-    </a>
-    <router-outlet></router-outlet>
-  </div>
    </div>
 <form>
   <div class="row">
@@ -74,17 +50,17 @@
       <input type = "text" id="name" name="name" [(ngModel)]="libraryName" class="form-control">
     </div>
     <div class="col-sm-2 form-group">
-      <label for="Location">Location</label>
-      <input type="text" id="location" name="location" [(ngModel)]="libraryLocation" class="form-control">
+      <label for="XCoordinate">X Coordinate</label>
+      <input type="text" id="XCoordinate" name="XCoordinate" [(ngModel)]="libraryXCoordinate" class="form-control">
     </div>
     <div class="col-sm-2 form-group">
-      <label for="ID">ID</label>
-      <input type="number" id="ID" name="ID" [(ngModel)]="libraryID" class="form-control">
+      <label for="YCoordinate">Y Coordinate</label>
+      <input type="text" id="YCoordinate" name="YCoordinate" [(ngModel)]="libraryYCoordinate" class="form-control">
     </div>
   </div>
     <div class="col-xs-20">
       <button class="btn btn-success" (click)="addLibrary()" type="submit">Add</button>
-      <button class="btn btn-danger" badge-danger type="button" (click)="deleteLibrary()" >Delete</button>
+      
   </div>
 </form>
 

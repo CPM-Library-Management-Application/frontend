@@ -1,4 +1,3 @@
-import { EditEmployeeComponent } from './private/page-admin-panel/employees/edit-employee.component';
 import { Input, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'
@@ -63,8 +62,7 @@ import { MatCardModule } from '@angular/material/card';
     SpinnerComponent,
     PageBookBorrowingTransactionDetailsComponent,
     
-
-    EditEmployeeComponent,
+    
      ResultListWithsearchComponent,
      LeafletMapComponent
   ],
