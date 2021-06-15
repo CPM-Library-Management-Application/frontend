@@ -1,12 +1,13 @@
 export class Library {
     public name: string;
-    public location: string;
-    public ID: any;
-   
+    public x_coordinate: number;
+    public y_coordinate: number;
+    public library_id : number;
 
-   constructor(name: string, loc: string, ID: any){
+   constructor(name: string, x_coordinate: number, y_coordinate: number, library_id: number){
        this.name = name;
-       this.location = loc;
-       this.ID = ID;
+       this.x_coordinate = x_coordinate;
+       this.y_coordinate = y_coordinate;
+       this.library_id = library_id;
    }
 }

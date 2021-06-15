@@ -1,4 +1,3 @@
-import { EditEmployeeComponent } from './private/page-admin-panel/employees/edit-employee.component';
 import { NgModule } from '@angular/core';
 import { BookDetailsComponent } from './common/book-details/book-details.component';
 import { PageBookAddComponent } from './private/page-employee-panel/employee-panel/book-add/book-add.component';
@@ -34,7 +33,6 @@ export const routes: Routes = [
   { path: 'private/user-panel', component: PageUserPanelComponent, canActivate: [AuthGuard, RegisteredUserAuthGuard ]},
   { path: 'private/user-panel/:transactionId', component: PageBookBorrowingTransactionDetailsComponent, canActivate: [AuthGuard, RegisteredUserAuthGuard ]},
   { path: 'private/admin-panel/listoflibraries', component: PageAdminPanelComponent, canActivate: [AuthGuard, AdminAuthGuard]},
-  { path: 'private/admin-panel/editemployee/:id', component: EditEmployeeComponent,canActivate: [AuthGuard, AdminAuthGuard] },
   { path: '', redirectTo: 'employees', pathMatch: 'full' },
  
 ]  
